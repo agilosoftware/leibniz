@@ -113,6 +113,12 @@ module Leibniz
       platform[:driver_config][:box_url] = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_#{distro}_provisionerless.box"
       platform[:driver_config][:network] = [["private_network", {:ip => ipaddress}]]
       platform[:driver_config][:require_chef_omnibus] = spec["Chef Version"] || true
+      platform[:driver_config][:customize] = Hash.new
+      customize_params = @config['driver']['customize']
+      customize_params.each { |custom_value|
+        platform[:driver_config][:customize][custom_value[0]] = custom_value[1]
+      }
+      require 'byebug'; byebug
       platform[:driver_config][:ipaddress] = ipaddress
       platform[:run_list] = spec["Run List"].split(",")
       platform
