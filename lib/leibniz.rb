@@ -84,7 +84,7 @@ module Leibniz
 
     def read
       {
-        :driver_plugin => @config['driver'],
+        :driver_plugin => @config['driver']['name'],
         :platforms => platforms,
         :suites => suites
       }
@@ -118,7 +118,6 @@ module Leibniz
       customize_params.each { |custom_value|
         platform[:driver_config][:customize][custom_value[0]] = custom_value[1]
       }
-      require 'byebug'; byebug
       platform[:driver_config][:ipaddress] = ipaddress
       platform[:run_list] = spec["Run List"].split(",")
       platform
