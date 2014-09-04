@@ -97,6 +97,7 @@ module Leibniz
     def create_suite(spec)
       suite = Hash.new
       suite[:name] = @config['suites'].first['name']
+      suite[:provisioner] = @config['provisioner'] || "chef_solo"
       suite[:run_list] = @config['suites'].first['run_list']
       suite[:data_bags_path] = @config['suites'].first['data_bags_path']
       suite
